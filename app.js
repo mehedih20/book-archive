@@ -23,7 +23,7 @@ const showBooks = (books) => {
 
   if (bookList.length === 0) {
     showSearchCount(false);
-    return;
+    spinner.style.display = "none";
   } else {
     showSearchCount(true, books.numFound, bookList.length);
 
@@ -72,6 +72,10 @@ const showBooks = (books) => {
 };
 
 const getBooks = (text) => {
+  container.textContent = "";
+  searchCounter.textContent = "";
+  spinner.style.display = "block";
+  //   ----------------------------
   const url = `https://openlibrary.org/search.json?q=${text}`;
   fetch(url)
     .then((res) => res.json())
@@ -84,9 +88,6 @@ const loadBooks = () => {
     getBooks(inputValue);
   }
   inputField.value = "";
-  container.textContent = "";
-  searchCounter.textContent = "";
-  spinner.style.display = "block";
 };
 
 // ======== init function ============
@@ -96,3 +97,5 @@ getBooks("reactjs");
 // ======== Event Listener ===========
 
 inputBtn.addEventListener("click", loadBooks);
+
+// ------------- End ------------------
