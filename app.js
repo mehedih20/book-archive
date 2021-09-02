@@ -2,6 +2,7 @@ const inputField = document.getElementById("input-field");
 const inputBtn = document.getElementById("input-btn");
 const container = document.getElementById("card-container");
 const searchCounter = document.getElementById("search-count");
+const spinner = document.getElementById("spinner");
 
 // ============== Functions ===============
 
@@ -19,7 +20,6 @@ const showSearchCount = (value, total = 0, count = 0) => {
 
 const showBooks = (books) => {
   const bookList = books.docs;
-  container.textContent = "";
 
   if (bookList.length === 0) {
     showSearchCount(false);
@@ -51,7 +51,7 @@ const showBooks = (books) => {
         <p class="card-text fw-light text-primary">${authorName}</p>
       </div>
       <div class="card-footer">
-        <small class="text-muted">
+        <small class="text-muted" title="${publisherName}">
           Publisher: ${
             publisherName.length > 35
               ? publisherName.substring(0, 33) + "..."
@@ -65,6 +65,7 @@ const showBooks = (books) => {
       </div>
   </div>
       `;
+      spinner.style.display = "none";
       container.appendChild(singleBook);
     });
   }
@@ -83,6 +84,9 @@ const loadBooks = () => {
     getBooks(inputValue);
   }
   inputField.value = "";
+  container.textContent = "";
+  searchCounter.textContent = "";
+  spinner.style.display = "block";
 };
 
 // ======== init function ============

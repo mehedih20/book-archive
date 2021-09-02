@@ -4,3 +4,10 @@
   justify-content: center;
   padding: 15px 0;
 }
+
+.spinner-margin {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
